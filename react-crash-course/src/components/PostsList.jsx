@@ -5,38 +5,40 @@ import NewPost from "./NewPost";
 import { useState } from "react";
 import Modal from "./Modal";
 
-function PostsList() {
-  const [modalIsVisible, setModalIsVisible] = useState(true);
+function PostsList({ isPosting, onStopPosting }) {
   const [enteredBody, setEnteredBody] = useState("");
   const [enteredAuthor, setEnteredAuthor] = useState("");
-
-  function hideModalHandler() {
-    setModalIsVisible(false);
-  }
 
   function bodyChangeHandler(event) {
     setEnteredBody(event.target.value);
   }
-  function authorChangeHandle(event) {
+  function authorChangeHandler(event) {
     setEnteredAuthor(event.target.value);
   }
 
-  let modalContent;
+  // let modalContent;
 
-  if (modalIsVisible) {
-    modalContent = (
-      <Modal onClose={hideModalHandler}>
-        <NewPost
-          onBodyChange={bodyChangeHandler}
-          onAuthorChange={authorChangeHandle}
-        />
-      </Modal>
-    );
-  }
+  // if (modalIsVisible) {
+  //   modalContent = (
+  //     <Modal onClose={hideModalHandler}>
+  //       <NewPost
+  //         onBodyChange={bodyChangeHandler}
+  //         onAuthorChange={authorChangeHandle}
+  //       />
+  //     </Modal>
+  //   );
+  // }
 
   return (
     <>
-      {modalContent}
+      {isPosting && (
+        <Modal onClose={onStopPosting}>
+          <NewPost
+            onBodyChange={bodyChangeHandler}
+            onAuthorChange={authorChangeHandler}
+          />
+        </Modal>
+      )}
 
       <ul className={classes.posts}>
         <Post author={enteredAuthor} body={enteredBody} />
