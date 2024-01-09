@@ -1,4 +1,3 @@
-import { setState } from "react";
 import Post from "./Post";
 import classes from "./PostsList.module.css";
 import NewPost from "./NewPost";
@@ -36,13 +35,14 @@ function PostsList({ isPosting, onStopPosting }) {
           <NewPost
             onBodyChange={bodyChangeHandler}
             onAuthorChange={authorChangeHandler}
+            onCancel={onStopPosting}
           />
         </Modal>
       )}
 
       <ul className={classes.posts}>
         <Post author={enteredAuthor} body={enteredBody} />
-        <Post author="Jade" body="React.js is very nice" />
+        <Post author="Warren" body="React.js is very nice" />
       </ul>
     </>
   );
